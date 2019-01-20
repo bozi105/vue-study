@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <p v-cloak>{{ msg }}</p>
+        <p v-text="msg"></p>
+        <!-- v-text 没有闪烁问题  -->
+        <!-- v-text会覆盖元素中原本的内容 但是插值表达式 只会替换自己的这个占位符 -->
+        <p v-html="msg2"></p>
+    </div>
+
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                msg: 123,
+                msg2: "<h1>大大大</h1>"
+            },
+            methods: {
+
+
+            }
+        })
+    </script>
+</body>
+
+</html>

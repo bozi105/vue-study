@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+    <script src="./node_modules/vue-resource/dist/vue-resource.min.js"></script>
+    <link rel="stylesheet" href="./bootstrap-3.3.7.css">
+</head>
+
+<body>
+    <div id="app">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">添加品牌</h3>
+            </div>
+            <div class="panel-body form-inline">
+                <label for="">
+                    Name:
+                    <input type="text" class="form-control" v-model="name">
+                </label>
+                <label for="">
+                    <input type="button" value="添加" class="btn btn-primary" @click="add">
+                </label>
+            </div>
+        </div>
+
+
+        <table class="table table-hover table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Ctime</th>
+                    <th>Operation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="item in list" :key="item.id">
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.ctime}}</td>
+                    <td>
+                        <a href="" @click.prevent="del(item.id)">删除</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                list: "",
+                name: ""
+            },
+            methods: {
+                getlist() {
+                    this.$http.get("http://vue.lovegf.cn:8899/api/getprodlist").then(result => {
+                        // console.log(result)
+                        if (result.body.status === 0) {
+                            this.list = result.body.message
+                        } else {
+                            alert("失败了")
+                        }
+                    })
+                },
+                add() {
+                    this.$http.post("http://vue.lovegf.cn:8899/api/addproduct", {
+                        name: this.name
+                    }, {
+                        emulateJSON: true
+                    }).then(result => {
+                        if (result.body.status === 0) {
+                            this.getlist()
+                        } else {
+                            alert("添加失败")
+                        }
+                    })
+                },
+                del(id) {
+                    this.$http.get("http://vue.lovegf.cn:8899/api/delproduct/" + id).then(result => {
+                        if (result.body.status === 0) {
+                            console.log(result)
+                            this.getlist()
+                        } else {
+                            alert("删除失败")
+                        }
+                    })
+                }
+            },
+            created() {
+                this.getlist()
+            }
+        })
+    </script>
+</body>
+
+</html>

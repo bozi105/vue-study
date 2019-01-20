@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="msg1">
+
+        <select v-model="opt">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+        </select>
+        <input type="text" v-model="msg2">
+
+        <input type="button" value="=" @click="calc">
+
+        <input type="text" v-model="msg3">
+
+
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                msg1: 0,
+                msg2: 0,
+                msg3: 0,
+                opt: "+"
+
+            },
+            methods: {
+                calc() {
+                    //逻辑
+                    /*                     switch (this.opt) {
+                                            case "+":
+                                                this.msg3 = parseInt(this.msg1) + parseInt(this.msg2)
+                                                break;
+
+                                            case "-":
+                                                this.msg3 = parseInt(this.msg1) - parseInt(this.msg2)
+                                                break;
+
+                                            case "*":
+                                                this.msg3 = parseInt(this.msg1) * parseInt(this.msg2)
+                                                break;
+
+                                            case "/":
+                                                this.msg3 = parseInt(this.msg1) / parseInt(this.msg2)
+                                                break;
+                                        } */
+
+
+                    //另一种方法 不推荐使用
+                    let str = "parseInt(this.msg1)" + this.opt + "parseInt(this.msg2)"
+                    this.msg3 = eval(str)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p> {{ msg | msgFilter("fuck") }} </p>
+    </div>
+
+    <script>
+        //定义全局过滤器
+        //参数1:过滤器名称
+        //参数2:回调函数
+        //     回调函数中第一参数时管道符左边的
+        //过滤器不会修改原数据 
+        Vue.filter("msgFilter", function(data, str) {
+            return data.replace("hello", str)
+        })
+
+
+
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                msg: "hello,world!"
+            },
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>
