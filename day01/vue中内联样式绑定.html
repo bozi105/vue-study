@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- style是属性  -->
+        <!-- 对象中 属性中出现-必须加引号 -->
+        <h4 :style="{color:'red','font-size':'40px'}">内联样式的额绑定</h4>
+
+        <h4 :style="styleObj">对象中 属性中出现-,就必须加引号</h4>
+
+        <h5 :style="[styleObj,styleObj2]">内联样式绑以数组的形式绑定 </h5>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                styleObj: {
+                    color: 'red',
+                    'font-size': '40px'
+                },
+                styleObj2: {
+                    "font-weight": 700,
+                    "font-style": "italic"
+                }
+            },
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

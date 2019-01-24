@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+    <style>
+        .haha-enter,
+        .haha-leave-to {
+            opacity: 0;
+            transform: translateX(180px)
+        }
+        
+        .haha-enter-active,
+        .haha-leave-active {
+            position: absolute;
+            transition: all .5s ease
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <input type="button" value="按钮" @click="change">
+
+        <transition name="haha">
+            <h3 v-if="flag">就这样看着你,看着你,目不转睛</h3>
+        </transition>
+
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                flag: true
+            },
+            methods: {
+                change() {
+                    this.flag = !this.flag
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

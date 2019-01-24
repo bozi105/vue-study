@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 使用组件 -->
+        <my-com></my-com>
+        <mytext></mytext>
+
+    </div>
+
+    <script>
+        //1.1使用Vue.extend来创建全局的Vue组件
+        var com1 = Vue.extend({
+            template: "<h3>组件的模板</h3>"
+        })
+
+        //2.注册组件 使用Vue.component()来注册
+        //参数1:组件名,如果注册时用了驼峰命名,使用时需改成-来连接
+        //参数2:组件对象
+        //注:组件必须要注册完成后,才可以使用
+        Vue.component("myCom", com1)
+
+
+        var com2 = Vue.extend({
+            template: "<h1>这是mytext模板</h1>"
+        })
+
+
+        Vue.component("mytext", com2)
+
+        var vm = new Vue({
+            el: "#app",
+            data: {
+
+            },
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+    <style>
+        .v-enter,
+        .v-leave-to {
+            opacity: 0;
+            transform: translateX(300px)
+        }
+        
+        .v-enter-active,
+        .v-leave-active {
+            transition: all .5s ease
+        }
+        
+        .ok-enter,
+        .ok-leave-to {
+            opacity: 0;
+            transform: translateY(200px)
+        }
+        
+        .ok-enter-active,
+        .ok-leave-active {
+            transition: all .5s ease
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="app">
+        <input type="button" value="toggle" @click="flag1=!flag1">
+
+        <transition>
+            <h3 v-if="flag1">分手伤了谁,谁把他变美</h3>
+        </transition>
+
+        <hr>
+
+        <input type="button" value="toggle" @click="flag2=!flag2">
+
+        <transition name="ok">
+            <h3 v-if="flag2">我只有一句不后悔的成全</h3>
+        </transition>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                flag1: false,
+                flag2: false
+            },
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

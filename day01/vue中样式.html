@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+    <style>
+        .red {
+            color: brown
+        }
+        
+        .thin {
+            font-weight: 200
+        }
+        
+        .italic {
+            font-style: italic
+        }
+        
+        .active {
+            letter-spacing: 0.5em
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <h1 class="red thin"> 大大的h1</h1> -->
+        <!-- 1.第一种使用方式  直接传递一个数组  这里的calss需要使用
+        v-bind进行绑定 -->
+        <h1 :class="['red','italic']"> 大大的h1</h1>
+
+        <!-- 2 在数组中使用三元表达式 -->
+        <h2 :class="['thin','italic',flag?'active':'']"> 假按揭假按揭啊</h2>
+
+
+        <!-- 3.数组中使用对象来代替三元表达式 来提高代码的可读性 -->
+        <h2 :class="['thin','italic',{red:flag}]"> 撒娇的合格的合格</h2>
+
+
+
+        <!-- 4.直接使用对象   使用v-bind 绑定对象的时候 ,对象的属性是类名  对象的属性可带引号,也可不带-->
+        <h2 :class="{red:flag,active:falg}"> 撒娇的合格的合格</h2>
+
+
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                "flag": true
+            },
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>
