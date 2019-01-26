@@ -12,47 +12,60 @@
 
 <body>
     <div id="app">
-        <!-- 如果在路由中,使用查询字符串,给路由传递参数,则不需要修改 路由规则的path属性 -->
-        <router-link to="/login?id=10&name=zs">登录</router-link>
+
+        <router-link to="/login/12/ls">登录</router-link>
         <router-link to="/register">注册</router-link>
+
 
         <router-view></router-view>
     </div>
 
+    <template id="tmp1">
+        <div>
+            <h3>这是登录组件---{{$route.params.id}}--{{$route.params.name}}</h3>
+        </div>
+    </template>
+
+    <template id="tmp2">
+        <div>
+            <h3>这是注册组件</h3>
+        </div>
+    </template>
+
+
     <script>
         var login = {
-            template: "<h3>登录组件 ----{{$route.query.id}}---{{$route.query.name}}</h3>",
+            template: "#tmp1",
             data() {
                 return {
-                    msg: "123"
+                    msg: 123
                 }
-            }
+            },
+            created() {
+                /*  console.log(this.$route)
+                 console.log(this.$route.params.id) */
+            },
         }
 
         var register = {
-            template: "<h3>注册组件</h3>"
+            template: "#tmp2"
         }
 
-        var router = new VueRouter({
+        let router = new VueRouter({
             routes: [{
-                path: '/login',
+                path: "/login/:id/:name",
                 component: login
             }, {
-                path: '/register',
+                path: "/register",
                 component: register
             }, ]
         })
 
 
-
         let vm = new Vue({
             el: "#app",
-            data: {
-
-            },
-            methods: {
-
-            },
+            data: {},
+            methods: {},
             router
         })
     </script>

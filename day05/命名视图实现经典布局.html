@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue-2.4.0.js"></script>
+    <script src="./vue-router-3.0.1.js"></script>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .header {
+            background-color: blue;
+            height: 80px
+        }
+        
+        h3 {
+            margin: 0;
+            padding: 0;
+            font-size: 16px;
+        }
+        
+        .container {
+            display: flex;
+            height: 600px
+        }
+        
+        .left {
+            background-color: lightgreen;
+            flex: 2
+        }
+        
+        .right {
+            background-color: lightpink;
+            flex: 8
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+
+        <router-view></router-view>
+
+        <div class="container">
+            <router-view name="left"></router-view>
+            <router-view name="right"></router-view>
+        </div>
+
+    </div>
+    <script>
+        var header = {
+            template: '<h3 class="header">头部区域</h3>'
+        }
+
+        var leftBox = {
+            template: '<h3 class="left">left区域</h3>'
+        }
+
+        var rightBox = {
+            template: '<h3 class="right">right区域</h3>'
+        }
+
+        var router = new VueRouter({
+            routes: [{
+                path: "/",
+                components: {
+                    default: header,
+                    left: leftBox,
+                    right: rightBox
+                }
+            }]
+        })
+
+        let vm = new Vue({
+            el: "#app",
+            data: {
+
+            },
+            methods: {
+
+            },
+            router
+        })
+    </script>
+</body>
+
+</html>
