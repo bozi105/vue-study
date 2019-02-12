@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue-2.4.0.js"></script>
+    <script src="./vue-router-3.0.1.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <com1 v-bind:parentmsg="msg" @func="getMsgFormSon"></com1>
+    </div>
+
+    <template id="tmp1">
+        <div>
+            <h3>这是子组件---{{msg}}---{{parentmsg}}</h3>
+            <input type="button" value="向父组件传递消息" @click="sendMsg">
+        </div>
+    </template>
+
+    <script>
+        var com1 = {
+            template: "#tmp1",
+            data() {
+                return {
+                    msg: "我是大头儿子"
+                }
+            },
+            props: ["parentmsg"],
+            methods: {
+                sendMsg() {
+                    this.$emit("func", this.msg)
+                }
+            }
+        }
+
+
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                msg: "我是小头爸爸",
+                msgFromSon: ''
+            },
+            methods: {
+                getMsgFormSon(data) {
+                    this.msgFromSon = data
+                    console.log(this.msgFromSon)
+                }
+            },
+            //私有
+            components: {
+                com1
+            }
+        })
+    </script>
+</body>
+
+</html>
